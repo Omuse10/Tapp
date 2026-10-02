@@ -54,6 +54,15 @@ export function NavDial({
         }}
       >
         <button
+          aria-label="Previous section"
+          onClick={() => step(-1)}
+          disabled={index === 0}
+          className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-muted-foreground transition-colors hover:text-foreground disabled:opacity-30"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+
+        <button
           onClick={() => step(1)}
           aria-label={`Current section: ${current.label}. Go to next section`}
           className="flex min-w-0 flex-1 items-center gap-4"
