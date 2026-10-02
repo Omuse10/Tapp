@@ -1,0 +1,145 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * tapp design system — dark premium glass interface.
+ * All colors are oklch semantic tokens. Never hardcode colors in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-violet: var(--violet);
+  --color-glass: var(--glass);
+  --color-glass-border: var(--glass-border);
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-sans: "Space Grotesk", system-ui, sans-serif;
+}
+
+:root {
+  --radius: 1.25rem;
+  --background: oklch(0.08 0.012 78);
+  --foreground: oklch(0.96 0.012 85);
+  --card: oklch(0.13 0.014 78);
+  --card-foreground: oklch(0.96 0.012 85);
+  --popover: oklch(0.13 0.014 78);
+  --popover-foreground: oklch(0.96 0.012 85);
+  --primary: oklch(0.81 0.086 76);
+  --primary-foreground: oklch(0.18 0.02 78);
+  --secondary: oklch(0.19 0.016 78);
+  --secondary-foreground: oklch(0.96 0.012 85);
+  --muted: oklch(0.17 0.014 78);
+  --muted-foreground: oklch(0.72 0.03 82);
+  --accent: oklch(0.86 0.085 76);
+  --accent-foreground: oklch(0.18 0.02 78);
+  --violet: oklch(0.66 0.09 72);
+  --destructive: oklch(0.6 0.22 22);
+  --destructive-foreground: oklch(0.98 0.003 250);
+  --border: oklch(0.86 0.085 76 / 12%);
+  --input: oklch(0.86 0.085 76 / 16%);
+  --ring: oklch(0.81 0.086 76);
+  --glass: oklch(0.86 0.085 76 / 4%);
+  --glass-border: oklch(0.86 0.085 76 / 14%);
+
+  --gradient-accent: linear-gradient(120deg, oklch(0.86 0.085 76), oklch(0.66 0.09 72));
+  --gradient-aura: radial-gradient(
+    60% 50% at 50% 0%,
+    color-mix(in oklab, var(--primary) 22%, transparent),
+    transparent 70%
+  );
+  --shadow-glow: 0 0 40px -8px color-mix(in oklab, var(--primary) 50%, transparent);
+  --shadow-glass: 0 20px 60px -24px oklch(0 0 0 / 80%);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior: none;
+  }
+}
+
+@utility glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(22px) saturate(140%);
+  box-shadow: var(--shadow-glass);
+}
+
+@utility glow {
+  box-shadow: var(--shadow-glow);
+}
+
+@utility text-gradient {
+  background: var(--gradient-accent);
+  background-clip: text;
+  color: transparent;
+}
+
+@utility aura {
+  background-image: var(--gradient-aura);
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.home-screen { background: var(--background); }
+.home-wordmark { filter: drop-shadow(0 8px 40px color-mix(in oklab, var(--primary) 30%, transparent)); }
+.home-artwork { height: 56%; mask-image: linear-gradient(to bottom, transparent, black 10%, black 82%, transparent); }
+.explore-ring { border: 1px solid var(--primary); box-shadow: 0 0 22px -10px var(--primary); }
+.nav-glass { background: color-mix(in oklab, var(--card) 73%, transparent); border: 1px solid color-mix(in oklab, var(--foreground) 18%, transparent); backdrop-filter: blur(24px) saturate(140%); box-shadow: 0 8px 35px -12px color-mix(in oklab, var(--primary) 24%, transparent), inset 0 1px 12px color-mix(in oklab, var(--foreground) 5%, transparent); }
+.nav-icon { border: 1px solid var(--primary); box-shadow: 0 0 18px -3px var(--primary); }
+@media (max-width: 640px) and (max-height: 740px) {
+  .home-artwork { height: 48%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
