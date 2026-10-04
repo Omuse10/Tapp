@@ -127,12 +127,31 @@
 
 .home-screen { background: var(--background); }
 .home-wordmark { filter: drop-shadow(0 8px 40px color-mix(in oklab, var(--primary) 30%, transparent)); }
-.home-artwork { height: 56%; mask-image: linear-gradient(to bottom, transparent, black 10%, black 82%, transparent); }
+.home-artwork {
+  bottom: 8rem;
+  display: flex;
+  height: min(62svh, 56vw);
+  justify-content: flex-end;
+  padding-right: 1rem;
+  mask-image: linear-gradient(to bottom, transparent, black 8%, black 100%);
+}
 .explore-ring { border: 1px solid var(--primary); box-shadow: 0 0 22px -10px var(--primary); }
 .nav-glass { background: color-mix(in oklab, var(--card) 73%, transparent); border: 1px solid color-mix(in oklab, var(--foreground) 18%, transparent); backdrop-filter: blur(24px) saturate(140%); box-shadow: 0 8px 35px -12px color-mix(in oklab, var(--primary) 24%, transparent), inset 0 1px 12px color-mix(in oklab, var(--foreground) 5%, transparent); }
 .nav-icon { border: 1px solid var(--primary); box-shadow: 0 0 18px -3px var(--primary); }
-@media (max-width: 640px) and (max-height: 740px) {
-  .home-artwork { height: 48%; }
+@media (max-width: 640px) {
+  .home-copy { padding-top: max(7rem, 16svh); }
+  .home-artwork {
+    bottom: max(7.5rem, calc(env(safe-area-inset-bottom) + 6rem));
+    height: min(40svh, 94vw);
+    justify-content: center;
+    padding: 0 1rem;
+  }
+}
+@media (max-width: 640px) and (max-height: 640px) {
+  .home-copy { padding-top: 5rem; }
+  .home-copy > p { margin-top: 1rem; font-size: 1.25rem; }
+  .home-copy > button { margin-top: 1.25rem; }
+  .home-artwork { height: min(26svh, 48vw); }
 }
 
 @media (prefers-reduced-motion: reduce) {

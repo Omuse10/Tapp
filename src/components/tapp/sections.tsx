@@ -6,15 +6,27 @@ import { GlassPanel, GlowButton, Pill, SectionTitle } from "./ui";
 
 const shell = "mx-auto w-full max-w-3xl px-6 pb-40 pt-24";
 
-export function HomeSection({ onActivate, activated }: { onActivate: () => void; activated: boolean }) {
+export function HomeSection({
+  onActivate,
+  activated,
+}: {
+  onActivate: () => void;
+  activated: boolean;
+}) {
   return (
     <div className="home-screen relative mx-auto min-h-screen w-full max-w-6xl overflow-hidden">
-      <div className="relative z-10 mx-auto w-full max-w-3xl px-6 pt-[19vh] sm:pt-[18vh]">
+      <div className="home-copy relative z-10 mx-auto w-full max-w-6xl px-6 pt-[19vh] sm:pt-[18vh]">
         <h1 className="home-wordmark leading-none">
-          <img src={logoWordmark} alt="tapp — Verify, Connect, Build Trust" className="w-[clamp(18rem,46vw,34rem)]" />
+          <img
+            src={logoWordmark}
+            alt="tapp — Verify, Connect, Build Trust"
+            className="w-full max-w-[clamp(17rem,46vw,34rem)]"
+          />
         </h1>
         <p className="mt-6 max-w-sm text-[clamp(1.5rem,3vh,2rem)] font-normal leading-tight text-muted-foreground sm:mt-7">
-          Digital experiences,<br />made simple.
+          Digital experiences,
+          <br />
+          made simple.
         </p>
         <button
           onClick={onActivate}
@@ -23,7 +35,10 @@ export function HomeSection({ onActivate, activated }: { onActivate: () => void;
           <span className="explore-ring relative grid h-12 w-12 place-items-center rounded-full">
             <motion.span
               className="h-2 w-2 rounded-full bg-primary-foreground"
-              animate={{ scale: activated ? [1, 1.6, 1] : 1, opacity: activated ? [0.6, 1, 0.6] : 1 }}
+              animate={{
+                scale: activated ? [1, 1.6, 1] : 1,
+                opacity: activated ? [0.6, 1, 0.6] : 1,
+              }}
               transition={{ duration: 1.4, repeat: activated ? Infinity : 0 }}
             />
           </span>
@@ -31,12 +46,18 @@ export function HomeSection({ onActivate, activated }: { onActivate: () => void;
         </button>
       </div>
       <motion.div
-        className="home-artwork pointer-events-none absolute inset-x-0 bottom-0 overflow-hidden"
+        className="home-artwork pointer-events-none absolute inset-x-0 overflow-hidden"
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.15 }}
       >
-        <img src={heroImage} alt="A luminous smart card and phone" width={1024} height={1024} className="h-full w-full object-cover object-center" />
+        <img
+          src={heroImage}
+          alt="A luminous smart card and phone"
+          width={1024}
+          height={1024}
+          className="hero-product-art h-full max-w-full w-auto object-contain"
+        />
       </motion.div>
     </div>
   );
