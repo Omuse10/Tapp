@@ -1,8 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Home, Info, Zap, Diamond, Box, User, Menu } from "lucide-react";
+import { Home, Info, Zap, Diamond, Box, User, Menu, Check } from "lucide-react";
 import { NavDial, type NavItem } from "@/components/tapp/NavDial";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import logoMark from "@/assets/tapp-logo-mark.png";
 import {
   AboutSection,
@@ -92,13 +100,37 @@ function Index() {
         >
           <img src={logoMark} alt="tapp" className="h-11 w-auto" />
         </button>
-        <button
-          onClick={() => go(index + 1 >= items.length ? 0 : index + 1, 1)}
-          aria-label="Next experience"
-          className="grid h-10 w-10 place-items-center"
-        >
-          <Menu className="h-7 w-7 stroke-[1.5]" />
-        </button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button aria-label="Open page menu" className="grid h-10 w-10 place-items-center">
+              <Menu className="h-7 w-7 stroke-[1.5]" />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            align="end"
+            sideOffset={10}
+            className="w-[min(30rem,calc(100vw-3rem))] border-glass-border bg-card/95 p-3 backdrop-blur-xl"
+          >
+            <DropdownMenuLabel className="px-4 py-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+              Pages
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            {items.map(({ id, label, icon: Icon }, pageIndex) => (
+              <DropdownMenuItem
+                key={id}
+                aria-current={pageIndex === index ? "page" : undefined}
+                onSelect={() => {
+                  if (pageIndex !== index) go(pageIndex, pageIndex > index ? 1 : -1);
+                }}
+                className="gap-4 px-4 py-3.5 text-base"
+              >
+                <Icon className="h-4 w-4" />
+                <span>{label}</span>
+                {pageIndex === index && <Check className="ml-auto h-4 w-4 text-primary" />}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </header>
 
       <AnimatePresence mode="wait" custom={dir}>
