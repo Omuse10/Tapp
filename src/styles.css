@@ -133,6 +133,13 @@
   justify-content: flex-end;
   padding-right: 1rem;
 }
+@media (min-width: 1024px) {
+  .home-artwork {
+    height: min(80svh, clamp(32rem, 50vw, 45rem));
+    justify-content: center;
+    padding-right: 0;
+  }
+}
 .explore-ring { border: 1px solid var(--primary); box-shadow: 0 0 22px -10px var(--primary); }
 .nav-glass { background: color-mix(in oklab, var(--card) 73%, transparent); border: 1px solid color-mix(in oklab, var(--foreground) 18%, transparent); backdrop-filter: blur(24px) saturate(140%); box-shadow: 0 8px 35px -12px color-mix(in oklab, var(--primary) 24%, transparent), inset 0 1px 12px color-mix(in oklab, var(--foreground) 5%, transparent); }
 .nav-icon { border: 1px solid var(--primary); box-shadow: 0 0 18px -3px var(--primary); }
@@ -145,6 +152,9 @@
     padding: 0;
   }
   .hero-product-art {
+    width: min(calc(100vw - 2rem), 52svh);
+    height: auto;
+    max-height: 100%;
     mix-blend-mode: screen;
   }
 }

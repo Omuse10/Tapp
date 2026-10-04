@@ -23,6 +23,7 @@ export function SectionTitle({ eyebrow, title }: { eyebrow: string; title: React
   );
 }
 
+// eslint-disable-next-line prettier/prettier
 export function GlowButton({
   children,
   href,

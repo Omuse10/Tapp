@@ -93,11 +93,7 @@ function Index() {
       <div className="pointer-events-none fixed inset-0 aura -z-10" aria-hidden />
 
       <header className="fixed inset-x-0 top-0 z-40 flex items-center justify-between px-7 py-8 sm:px-10">
-        <button
-          onClick={() => go(0, -1)}
-          className="flex items-center"
-          aria-label="tapp home"
-        >
+        <button onClick={() => go(0, -1)} className="flex items-center" aria-label="tapp home">
           <img src={logoWordmark} alt="tapp" className="h-8 w-auto sm:h-9" />
         </button>
         <DropdownMenu>

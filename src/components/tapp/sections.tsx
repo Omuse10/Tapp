@@ -63,7 +63,7 @@ export function AboutSection() {
       <SectionTitle eyebrow="About" title="What is tapp?" />
       <p className="text-base leading-relaxed text-muted-foreground">
         tapp is a digital experience company built around one simple idea: making the physical
-        world connect effortlessly with the digital one.
+        connect effortlessly with the digital one.
       </p>
       <p className="mt-4 text-base leading-relaxed text-muted-foreground">
         We create smart, simple and beautifully designed experiences that let people tap, scan,
@@ -232,8 +232,16 @@ const products = [
 ];
 
 const examples = [
-  ["School", "Student taps card", ["Student Profile", "Announcements", "Reports", "Events", "Services"]],
-  ["Business", "Client taps business card", ["Contact", "Portfolio", "Social Media", "Website", "Products"]],
+  [
+    "School",
+    "Student taps card",
+    ["Student Profile", "Announcements", "Reports", "Events", "Services"],
+  ],
+  [
+    "Business",
+    "Client taps business card",
+    ["Contact", "Portfolio", "Social Media", "Website", "Products"],
+  ],
   ["Event", "Guest taps", ["Ticket", "Schedule", "Updates", "Venue", "Digital Content"]],
 ] as const;
 
@@ -300,7 +308,7 @@ export function ContactSection() {
         <GlowButton href="mailto:hello@tapp.africa">Start a conversation →</GlowButton>
       </div>
 
-        <footer className="mt-16 border-t border-glass-border pt-8">
+      <footer className="mt-16 border-t border-glass-border pt-8">
         <img src={logoLockup} alt="tapp — Verify, Connect, Build Trust" className="h-16 w-auto" />
         <p className="text-sm text-muted-foreground">Tap into more.</p>
         <div className="mt-5 flex flex-wrap gap-3 text-sm text-muted-foreground">
