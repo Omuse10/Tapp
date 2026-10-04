@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import heroImage from "@/assets/tapp-hero-gold.jpg";
+import logoWordmark from "@/assets/tapp-logo-wordmark.png";
 import logoLockup from "@/assets/tapp-logo-full.png";
 import { GlassPanel, GlowButton, Pill, SectionTitle } from "./ui";
 
@@ -13,7 +14,7 @@ export function HomeSection({
   activated: boolean;
 }) {
   return (
-    <div className="home-screen relative mx-auto min-h-screen w-full max-w-6xl overflow-hidden">
+    <div className="home-screen relative mx-auto min-h-svh w-full max-w-6xl overflow-hidden">
       <div className="home-copy relative z-10 mx-auto w-full max-w-6xl px-6 pt-[19vh] sm:pt-[18vh]">
         <h1 className="max-w-sm text-[clamp(1.5rem,3vh,2rem)] font-normal leading-tight text-muted-foreground">
           Digital experiences,
@@ -26,7 +27,7 @@ export function HomeSection({
         >
           <span className="explore-ring relative grid h-12 w-12 place-items-center rounded-full">
             <motion.span
-              className="h-2 w-2 rounded-full bg-primary-foreground"
+              className="h-2 w-2 rounded-full bg-primary"
               animate={{
                 scale: activated ? [1, 1.6, 1] : 1,
                 opacity: activated ? [0.6, 1, 0.6] : 1,

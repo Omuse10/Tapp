@@ -89,7 +89,7 @@ function Index() {
   ];
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-background">
+    <main className="relative h-[100svh] overflow-hidden bg-background">
       <div className="pointer-events-none fixed inset-0 aura -z-10" aria-hidden />
 
       <header className="fixed inset-x-0 top-0 z-40 flex items-center justify-between px-7 py-8 sm:px-10">
@@ -149,7 +149,9 @@ function Index() {
             if (info.offset.x < -70) go(index + 1, 1);
             else if (info.offset.x > 70) go(index - 1, -1);
           }}
-          className="no-scrollbar h-screen touch-pan-y overflow-y-auto"
+          className={`no-scrollbar h-[100svh] touch-pan-y ${
+            index === 0 ? "overflow-hidden" : "overflow-y-auto"
+          }`}
         >
           {sections[index]}
         </motion.section>
