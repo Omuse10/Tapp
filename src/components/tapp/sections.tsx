@@ -1,20 +1,92 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, type TouchEvent } from "react";
 import heroImage from "@/assets/tapp-hero-gold.jpg";
 import logoWordmark from "@/assets/tapp-logo-wordmark.png";
 import logoLockup from "@/assets/tapp-logo-full.png";
 import { GlassPanel, GlowButton, Pill, SectionTitle } from "./ui";
 
 const shell = "mx-auto w-full max-w-3xl px-6 pb-40 pt-24";
+const exploreCategories = [
+  {
+    id: "business-cards",
+    title: "Digital Business Cards",
+    description: "Share your identity and contact information instantly.",
+    solution: "Business Identity",
+  },
+  {
+    id: "tourism",
+    title: "Tourism Experiences",
+    description: "Discover destinations, places, stories, and interactive travel experiences.",
+    solution: "Custom Experiences",
+  },
+  {
+    id: "events",
+    title: "Events & Experiences",
+    description: "Interactive experiences for events, venues, and audiences.",
+    solution: "Event Experiences",
+  },
+  {
+    id: "smart-profiles",
+    title: "Smart Profiles",
+    description: "Digital profiles that bring important information together in one place.",
+    solution: "Digital Profiles",
+  },
+] as const;
 
 export function HomeSection({
   onActivate,
   activated,
+  onExplore,
 }: {
-  onActivate: () => void;
+  onActivate: (open: boolean) => void;
   activated: boolean;
+  onExplore: (solution: string) => void;
 }) {
+  const touchStart = useRef<{ x: number; y: number; inPanel: boolean } | null>(null);
+  const explorePanel = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!activated) return;
+    const frame = requestAnimationFrame(() => {
+      if (explorePanel.current) explorePanel.current.scrollTop = 0;
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [activated]);
+
+  const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    const touch = event.touches.item(0);
+    if (touch) {
+      const target = event.target;
+      touchStart.current = {
+        x: touch.clientX,
+        y: touch.clientY,
+        inPanel: target instanceof Element && target.closest(".explore-panel") !== null,
+      };
+    }
+  };
+
+  const handleTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
+    const origin = touchStart.current;
+    const touch = event.changedTouches.item(0);
+    touchStart.current = null;
+    if (!origin || !touch) return;
+
+    const distanceX = touch.clientX - origin.x;
+    const distanceY = touch.clientY - origin.y;
+    if (Math.abs(distanceY) < 48 || Math.abs(distanceY) <= Math.abs(distanceX)) return;
+    if (distanceY < 0 && !activated) window.setTimeout(() => onActivate(true), 100);
+    if (distanceY > 0 && activated) {
+      if (origin.inPanel && explorePanel.current && explorePanel.current.scrollTop > 0) return;
+      window.setTimeout(() => onActivate(false), 100);
+    }
+  };
+
   return (
-    <div className="home-screen relative mx-auto min-h-svh w-full max-w-6xl overflow-hidden">
+    <div
+      className="home-screen relative mx-auto min-h-svh w-full max-w-6xl overflow-hidden"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       <div className="home-copy relative z-10 mx-auto w-full max-w-6xl px-6 pt-[19vh] sm:pt-[18vh]">
         <h1 className="max-w-sm text-[clamp(1.5rem,3vh,2rem)] font-normal leading-tight text-muted-foreground">
           Digital experiences,
@@ -22,7 +94,10 @@ export function HomeSection({
           made simple.
         </h1>
         <button
-          onClick={onActivate}
+          type="button"
+          aria-expanded={activated}
+          aria-controls="tapp-explore-options"
+          onClick={() => onActivate(!activated)}
           className="mt-8 inline-flex items-center gap-4 text-base font-normal transition-opacity hover:opacity-80 sm:mt-10"
         >
           <span className="explore-ring relative grid h-12 w-12 place-items-center rounded-full">
@@ -35,9 +110,63 @@ export function HomeSection({
               transition={{ duration: 1.4, repeat: activated ? Infinity : 0 }}
             />
           </span>
-          {activated ? "Experience active" : "Tap to explore"}
+          {activated ? "Close exploration" : "Tap to explore"}
         </button>
       </div>
+      <AnimatePresence>
+        {activated && (
+          <motion.div
+            ref={explorePanel}
+            id="tapp-explore-options"
+            role="region"
+            aria-label="Tapp experiences"
+            className="explore-panel absolute z-20 flex flex-col overflow-y-auto rounded-md border border-glass-border bg-background/90 p-3 shadow-xl backdrop-blur-xl sm:p-5"
+            initial={{ opacity: 0, y: 18, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 12, scale: 0.98 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p
+              aria-label="Tap, explore, discover"
+              className="mb-3 flex shrink-0 items-center gap-2 text-[0.65rem] font-medium uppercase tracking-[0.24em] text-primary sm:mb-4"
+            >
+              <span>Tap</span>
+              <span aria-hidden="true">→</span>
+              <span>Explore</span>
+              <span aria-hidden="true">→</span>
+              <span>Discover</span>
+            </p>
+            <div className="explore-categories grid gap-2 sm:grid-cols-2 sm:gap-3">
+              {exploreCategories.map((category, categoryIndex) => (
+                <motion.article
+                  key={category.id}
+                  className="glass rounded-md p-3 sm:p-4"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.22, delay: categoryIndex * 0.035 }}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <h2 className="text-sm font-semibold sm:text-base">{category.title}</h2>
+                    <span className="text-[0.65rem] tabular-nums text-primary/70">
+                      0{categoryIndex + 1}
+                    </span>
+                  </div>
+                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                    {category.description}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => onExplore(category.solution)}
+                    className="mt-2 text-sm font-medium text-primary transition-colors hover:text-accent focus-visible:outline focus-visible:outline-1 focus-visible:outline-primary"
+                  >
+                    Explore
+                  </button>
+                </motion.article>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         className="home-artwork pointer-events-none absolute inset-x-0 overflow-hidden"

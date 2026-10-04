@@ -133,6 +133,14 @@
   justify-content: flex-end;
   padding-right: 1rem;
 }
+.explore-panel {
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  top: max(20rem, 36vh);
+  bottom: 9rem;
+  width: min(56rem, calc(100% - 2rem));
+}
 @media (min-width: 1024px) {
   .home-artwork {
     height: min(80svh, clamp(32rem, 50vw, 45rem));
@@ -145,6 +153,10 @@
 .nav-icon { border: 1px solid var(--primary); box-shadow: 0 0 18px -3px var(--primary); }
 @media (max-width: 640px) {
   .home-copy { padding-top: max(7rem, 16svh); }
+  .explore-panel {
+    top: clamp(12.75rem, 36svh, 19rem);
+    bottom: max(7.5rem, calc(env(safe-area-inset-bottom) + 6rem));
+  }
   .home-artwork {
     bottom: max(7.5rem, calc(env(safe-area-inset-bottom) + 6rem));
     height: min(52svh, 100vw);
@@ -163,6 +175,9 @@
   .home-copy > h1 { font-size: 1.25rem; }
   .home-copy > button { margin-top: 1.25rem; }
   .home-artwork { height: min(34svh, 65vw); }
+}
+@media (min-width: 360px) and (max-width: 640px) {
+  .explore-categories { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (prefers-reduced-motion: reduce) {

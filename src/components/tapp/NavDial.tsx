@@ -37,7 +37,7 @@ export function NavDial({
           exit={{ opacity: 0 }}
           className="text-xs tracking-[0.25em] text-muted-foreground"
         >
-          SWIPE TO EXPLORE →
+          SWIPE UP TO EXPLORE →
         </motion.p>
       )}
 

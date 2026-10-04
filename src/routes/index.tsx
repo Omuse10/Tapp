@@ -63,7 +63,13 @@ function Index() {
     setDir(direction);
     setIndex(Math.max(0, Math.min(items.length - 1, next)));
     setHint(false);
+    setActivated(false);
   }, []);
+
+  const exploreSolution = (solution: string) => {
+    setOpenSolution(solution);
+    go(3, 1);
+  };
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -80,7 +86,12 @@ function Index() {
   }, []);
 
   const sections = [
-    <HomeSection key="home" activated={activated} onActivate={() => setActivated(true)} />,
+    <HomeSection
+      key="home"
+      activated={activated}
+      onActivate={setActivated}
+      onExplore={exploreSolution}
+    />,
     <AboutSection key="about" />,
     <HowSection key="how" />,
     <SolutionsSection key="solutions" open={openSolution} setOpen={setOpenSolution} />,
