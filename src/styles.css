@@ -142,7 +142,7 @@
     bottom: max(7.5rem, calc(env(safe-area-inset-bottom) + 6rem));
     height: min(52svh, 100vw);
     justify-content: center;
-    padding: 0 1rem;
+    padding: 0;
   }
   .hero-product-art {
     mix-blend-mode: screen;
@@ -152,7 +152,7 @@
   .home-copy { padding-top: 5rem; }
   .home-copy > h1 { font-size: 1.25rem; }
   .home-copy > button { margin-top: 1.25rem; }
-  .home-artwork { height: min(30svh, 58vw); }
+  .home-artwork { height: min(34svh, 65vw); }
 }
 
 @media (prefers-reduced-motion: reduce) {
