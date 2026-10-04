@@ -39,8 +39,8 @@ export function HomeSection({
         </button>
       </div>
       <motion.div
-        className="home-artwork pointer-events-none absolute inset-x-0 overflow-hidden"
         initial={{ opacity: 0, y: 24 }}
+        className="home-artwork pointer-events-none absolute inset-x-0 overflow-hidden"
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.15 }}
       >
@@ -293,19 +293,35 @@ export function ContactSection() {
 
       <div className="mt-8 space-y-3">
         {[
-          ["Email", "hello@tapp.africa"],
-          ["Phone", "+254 700 000 000"],
+          ["Email", "tappauth@outlook.com"],
+          ["Phone", "0785704123"],
           ["Location", "Nairobi, Kenya"],
         ].map(([k, v]) => (
           <GlassPanel key={k} className="flex items-center justify-between gap-4 p-5">
             <span className="text-xs uppercase tracking-[0.25em] text-muted-foreground">{k}</span>
-            <span className="min-w-0 truncate text-sm">{v}</span>
+            {k === "Email" ? (
+              <a
+                href="mailto:tappauth@gmail.com"
+                className="min-w-0 truncate text-sm transition-colors hover:text-primary"
+              >
+                {v}
+              </a>
+            ) : k === "Phone" ? (
+              <a
+                href="tel:+254785704123"
+                className="min-w-0 truncate text-sm transition-colors hover:text-primary"
+              >
+                {v}
+              </a>
+            ) : (
+              <span className="min-w-0 truncate text-sm">{v}</span>
+            )}
           </GlassPanel>
         ))}
       </div>
 
       <div className="mt-8">
-        <GlowButton href="mailto:hello@tapp.africa">Start a conversation →</GlowButton>
+        <GlowButton href="mailto:tappauth@gmail.com">Start a conversation →</GlowButton>
       </div>
 
       <footer className="mt-16 border-t border-glass-border pt-8">
@@ -313,7 +329,13 @@ export function ContactSection() {
         <p className="text-sm text-muted-foreground">Tap into more.</p>
         <div className="mt-5 flex flex-wrap gap-3 text-sm text-muted-foreground">
           {["Instagram", "LinkedIn", "X"].map((s) => (
-            <a key={s} href="#" className="transition-colors hover:text-foreground">
+            <a
+              key={s}
+              href={s === "Instagram" ? "https://www.instagram.com/tapp_experience/?hl=en#" : "#"}
+              target={s === "Instagram" ? "_blank" : undefined}
+              rel={s === "Instagram" ? "noopener noreferrer" : undefined}
+              className="transition-colors hover:text-foreground"
+            >
               {s}
             </a>
           ))}
