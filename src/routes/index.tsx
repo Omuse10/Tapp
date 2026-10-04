@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import logoMark from "@/assets/tapp-logo-mark.png";
+import logoWordmark from "@/assets/tapp-logo-wordmark.png";
 import {
   AboutSection,
   ContactSection,
@@ -98,7 +98,7 @@ function Index() {
           className="flex items-center"
           aria-label="tapp home"
         >
-          <img src={logoMark} alt="tapp" className="h-11 w-auto" />
+          <img src={logoWordmark} alt="tapp" className="h-8 w-auto sm:h-9" />
         </button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
