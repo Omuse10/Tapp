@@ -126,11 +126,10 @@
 }
 
 .home-screen { background: var(--background); }
-.home-wordmark { filter: drop-shadow(0 8px 40px color-mix(in oklab, var(--primary) 30%, transparent)); }
 .home-artwork {
   bottom: 8rem;
   display: flex;
-  height: min(62svh, 56vw);
+  height: min(75svh, 65vw);
   justify-content: flex-end;
   padding-right: 1rem;
   mask-image: linear-gradient(to bottom, transparent, black 8%, black 100%);
@@ -142,16 +141,16 @@
   .home-copy { padding-top: max(7rem, 16svh); }
   .home-artwork {
     bottom: max(7.5rem, calc(env(safe-area-inset-bottom) + 6rem));
-    height: min(40svh, 94vw);
+    height: min(52svh, 100vw);
     justify-content: center;
     padding: 0 1rem;
   }
 }
 @media (max-width: 640px) and (max-height: 640px) {
   .home-copy { padding-top: 5rem; }
-  .home-copy > p { margin-top: 1rem; font-size: 1.25rem; }
+  .home-copy > h1 { font-size: 1.25rem; }
   .home-copy > button { margin-top: 1.25rem; }
-  .home-artwork { height: min(26svh, 48vw); }
+  .home-artwork { height: min(30svh, 58vw); }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import heroImage from "@/assets/tapp-hero-gold.jpg";
-import logoWordmark from "@/assets/tapp-logo-wordmark.png";
 import logoLockup from "@/assets/tapp-logo-full.png";
 import { GlassPanel, GlowButton, Pill, SectionTitle } from "./ui";
 
@@ -16,18 +15,11 @@ export function HomeSection({
   return (
     <div className="home-screen relative mx-auto min-h-screen w-full max-w-6xl overflow-hidden">
       <div className="home-copy relative z-10 mx-auto w-full max-w-6xl px-6 pt-[19vh] sm:pt-[18vh]">
-        <h1 className="home-wordmark leading-none">
-          <img
-            src={logoWordmark}
-            alt="tapp — Verify, Connect, Build Trust"
-            className="w-full max-w-[clamp(17rem,46vw,34rem)]"
-          />
-        </h1>
-        <p className="mt-6 max-w-sm text-[clamp(1.5rem,3vh,2rem)] font-normal leading-tight text-muted-foreground sm:mt-7">
+        <h1 className="max-w-sm text-[clamp(1.5rem,3vh,2rem)] font-normal leading-tight text-muted-foreground">
           Digital experiences,
           <br />
           made simple.
-        </p>
+        </h1>
         <button
           onClick={onActivate}
           className="mt-8 inline-flex items-center gap-4 text-base font-normal transition-opacity hover:opacity-80 sm:mt-10"
